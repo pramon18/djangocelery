@@ -10,9 +10,7 @@ def index(request):
     return HttpResponse(html)
 
 def progress(request, task_id):
-    print(task_id)
     res = AsyncResult(task_id)
-    print(res, res.ready(), res.result, res.state)
     if res.ready():
         html = "<html><body>O resultado do seu JOB é: {%s}.</body></html>" % res.result    
     else:

@@ -1,7 +1,6 @@
 from celery import Celery
 
-app = Celery('tasks', broker='amqp://pablo:12345@localhost:5672/', 
-             backend='db+sqlite:///results.sqlite')
+app = Celery('tasks')
 
 import os
 
