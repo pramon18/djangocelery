@@ -1,0 +1,36 @@
+version: "3"
+
+services:
+  api:
+    build: .
+    container_name: api
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./:/usr/src/app/
+    ports:
+      - "8000:8000"
+    depends_on: 
+      - rabbitmq
+  celery:
+    build: .
+    container_name: celery
+    command: celery -A celery_app.celery_t worker --loglevel=INFO --pool=solo
+    volumes:
+      - ./:/usr/src/app/
+    depends_on: 
+      - rabbitmq
+  flower:
+    build: .
+    container_name: flower
+    command: flower -A celery_app.celery_t --ports=5555
+    volumes:
+      - ./:/usr/src/app/
+    ports: 
+      - "5555:5555"
+    depends_on: 
+      - rabbitmq
+  rabbitmq:
+    image: rabbitmq:latest
+    ports:
+      - "5672:5672"
+      - "15672:15672"

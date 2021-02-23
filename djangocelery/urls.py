@@ -20,5 +20,5 @@ from api.views import index, progress
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/', index),
-    path(r'progress/<str:task_id>/', progress)
+    path(r'progress/<str:task_id>/', progress),
 ]

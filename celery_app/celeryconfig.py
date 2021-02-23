@@ -1,5 +1,5 @@
-broker_url = 'amqp://pablo:12345@localhost:5672/'
-result_backend = 'db+sqlite:///results.sqlite'
+broker_url = 'pyamqp://rabbitmq:5672'
+result_backend = 'amqp://rabbitmq:5672'
 
 task_serializer = 'json'
 result_serializer = 'json'
